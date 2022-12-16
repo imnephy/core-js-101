@@ -109,8 +109,8 @@ function memoize(func) {
  */
 function retry(func, attempts) {
   let lintAttempts = attempts;
-  return () => {
-    while (true) {
+  return function retriee() {
+    while (attempts !== 0) {
       try {
         return func();
       } catch (err) {
@@ -120,6 +120,7 @@ function retry(func, attempts) {
         }
       }
     }
+    return null;
   };
 }
 
